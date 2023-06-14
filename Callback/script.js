@@ -63,3 +63,97 @@ const arr2 = arr1.map((item) => {
 // - - -
 
 callback(arr2, out3);
+
+// Пример с input
+
+// ШАГ 1
+// document.querySelector('.b-4').addEventListener('click', getUserName);
+
+// function getUserName() {
+//     const userName =document.querySelector('.i-4').value;
+//     console.log(fixUserName(userName));
+// }
+
+// function fixUserName(str) {
+//     return str.trim().toLowerCase();
+// }
+
+// ШАГ 2
+// document.querySelector('.b-4').addEventListener('click', () => {
+//     getUserName(fixUserName);
+// });
+
+// function getUserName(fixFunc) {
+//     const userName =document.querySelector('.i-4').value;
+//     console.log(fixFunc(userName));
+// }
+
+// function fixUserName(str) {
+//     return str.trim().toLowerCase();
+// }
+
+// асинхронные callback функции
+
+// async function pageLoader(callback) {
+//     const data = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+//     callback(data);
+// }
+
+// function pageLoader(callback) {
+//     fetch('https://jsonplaceholder.typicode.com/todos/1')
+//     .then(response => response.json())
+//     .then(json => callback(json));
+    
+// }
+
+// function getAJAX(data) {
+//     console.log("Poslal Zapros");
+//     console.log('Otvet servera');
+//     console.log(data);
+// }
+// pageLoader(getAJAX)
+
+// - - - - - - - - - -
+
+// callback hell
+
+// приведённая ниже запись имеет плохую читаемость из-за вложенности
+// function pageLoader(callback) {
+//     fetch('https://jsonplaceholder.typicode.com/todos/1')
+//     .then(response => response.json())
+//     .then(json => {
+//         console.log("Poslal Zapros");
+//         console.log('Otvet servera');
+//         console.log(json);
+//         fetch('https://jsonplaceholder.typicode.com/users/' + json.userId)
+//             .then(response => response.json())
+//             .then(json => {
+//             console.log("Poslal Zapros");
+//             console.log('Otvet servera');
+//             console.log(json);
+//     });
+// }); 
+// }
+// pageLoader();
+
+
+// делаем то же самое, но в более приемлимом для чтения кода виде:
+
+function pageLoader(url, callback) {
+    fetch(url)
+        .then(response => response.json())
+        .then(json => callback(json))
+}
+
+function getAJAX(data) {
+    console.log("Poslal Zapros");
+    console.log('Otvet servera');
+    console.log(data);
+    pageLoader('https://jsonplaceholder.typicode.com/users/' + data.userId, showUser)
+}
+
+function showUser(user){
+    console.log(user);
+}
+
+pageLoader('https://jsonplaceholder.typicode.com/todos/1', getAJAX)
