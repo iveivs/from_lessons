@@ -1,5 +1,7 @@
 'use strict'
 
+// video link https://www.youtube.com/watch?v=36T9wXJKfuw
+
 const arr1 = [2, 2 , 1, 8, 16];
 
 const out1 = document.querySelector('.out-1');
@@ -42,6 +44,7 @@ function callback(arr, block) {
     block.innerHTML = out;
 }
 
+// функция колбека вставляет массивв в блок разметки
 function callback2(arr, block) {
     block.innerHTML = arr.join('*')
 }
@@ -139,21 +142,21 @@ callback(arr2, out3);
 
 // делаем то же самое, но в более приемлимом для чтения кода виде:
 
-function pageLoader(url, callback) {
-    fetch(url)
-        .then(response => response.json())
-        .then(json => callback(json))
-}
+// function pageLoader(url, callback) {
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(json => callback(json))
+// }
 
-function getAJAX(data) {
-    console.log("Poslal Zapros");
-    console.log('Otvet servera');
-    console.log(data);
-    pageLoader('https://jsonplaceholder.typicode.com/users/' + data.userId, showUser)
-}
+// function getAJAX(data) {
+//     console.log("Poslal Zapros");
+//     console.log('Otvet servera');
+//     console.log(data);
+//     pageLoader('https://jsonplaceholder.typicode.com/users/' + data.userId, showUser)
+// }
 
-function showUser(user){
-    console.log(user);
-}
+// function showUser(user){
+//     console.log(user);
+// }
 
-pageLoader('https://jsonplaceholder.typicode.com/todos/1', getAJAX)
+// pageLoader('https://jsonplaceholder.typicode.com/todos/1', getAJAX)
